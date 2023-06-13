@@ -17,6 +17,29 @@ class _TemperatureAndHumidityState extends State<TemperatureAndHumidity> {
   List<Map<String, dynamic>> sensorData = [];
 
   @override
+  void initState() {
+    super.initState();
+    _databaseRef = FirebaseDatabase.instance.reference().child('test');
+    _firebaseMessaging = FirebaseMessaging.instance;
+
+    // Listen to database changes
+    _databaseRef.onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null && data is Map<dynamic, dynamic>) {
+        setState(() {
+          temperature = double.parse(data['temperature'].toString());
+          humidity = double.parse(data['humidity'].toString());
+          sensorData.add({
+            'temperature': temperature,
+            'humidity': humidity,
+            'timestamp': DateTime.now(),
+          });
+        });
+      }
+    });
+    
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
