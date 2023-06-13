@@ -53,6 +53,24 @@ class _ForgotScreenState extends State<ForgotScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        Container(
+          width: double.infinity,
+          child: Image.asset(
+            "assets/images/Logo.jpg",
+            height: 300,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Container(
+            child: Text(
+              'Enter your email and we will send you a password reset link.',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
