@@ -9,6 +9,9 @@ class TemperatureAndHumidity extends StatefulWidget {
 }
 
 class _TemperatureAndHumidityState extends State<TemperatureAndHumidity> {
+  late DatabaseReference _databaseRef;
+  late FirebaseMessaging _firebaseMessaging;
+
   double temperature = 0.0;
   double humidity = 0.0;
   List<Map<String, dynamic>> sensorData = [];
