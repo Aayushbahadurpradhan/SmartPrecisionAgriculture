@@ -64,6 +64,32 @@ class _LoginScreensState extends State<LoginScreens> {
                           height: constraints.maxHeight * 0.02,
                         ),
                         Container(
+                          width: double.infinity,
+                          height: constraints.maxHeight * 0.12,
+                          margin: EdgeInsets.only(
+                            top: constraints.maxHeight * 0.01,
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (form.currentState!.validate()) {
+                                login();
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                            ),
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     );
                   }),
