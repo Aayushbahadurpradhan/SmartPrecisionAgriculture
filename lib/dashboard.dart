@@ -49,7 +49,15 @@ class _HomePageState extends State<HomePage> {
                         scale: 0.8,
                       ),
                     ),
-                   
+                    Center(
+                      child: Text(
+                        'Smart Agriculture',
+                        style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
