@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../Dashboard.dart';
 import '../register/signup.dart';
+import '../viewmodel/auth_view_model.dart';
 
 class LoginScreens extends StatefulWidget {
   const LoginScreens({Key? key}) : super(key: key);
@@ -31,7 +34,27 @@ class _LoginScreensState extends State<LoginScreens> {
                 ),
 
 
-
+                        SizedBox(
+                          height: constraints.maxHeight * 0.02,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: constraints.maxHeight * 0.12,
+                          margin: EdgeInsets.only(
+                            top: constraints.maxHeight * 0.01,
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (form.currentState!.validate()) {
+                                login();
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                            ),
                             child: const Text(
                               'Login',
                               style: TextStyle(
