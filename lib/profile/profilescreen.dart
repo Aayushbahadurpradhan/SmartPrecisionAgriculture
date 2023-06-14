@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'changepass.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -49,6 +46,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               SizedBox(height: 16),
+              Text(
+                'Username',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 8),
+              _isEditing
+                  ? TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Username',
+                  hintText: 'Enter username',
+                ),
+              )
+                  : Text(
+                userData.get('username') ?? 'N/A',
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Email',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ),
