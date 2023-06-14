@@ -71,10 +71,61 @@ class _ForgotScreenState extends State<ForgotScreen> {
             ),
           ),
         ),
+        SizedBox(
+          height: 30,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Container(
+            height: 60,
+            decoration: BoxDecoration(
+                color: const Color(0xffB4B4B4).withOpacity(0.6),
+                borderRadius: BorderRadius.circular(30)),
+            child: Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Center(
+                child: TextFormField(
+                  controller: email,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Email',
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+            onPressed: () {
+              passwordReset();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 25, vertical: 15),
+              child: Text(
+                "Reset Password",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+            )),
+
       ),
     );
   }
 }
+
+
+
+
+
 
 
 
