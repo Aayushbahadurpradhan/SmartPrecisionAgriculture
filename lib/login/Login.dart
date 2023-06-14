@@ -64,11 +64,28 @@ class _LoginScreensState extends State<LoginScreens> {
                             ),
                           ),
                         ),
-                   
+                        SizedBox(
+                          height: constraints.maxHeight * 0.02,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed("/forgotpassword");
+                                },
+                                child: const Text(
+                                  'Forgot Password?',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              )
                             ],
                           ),
                         ),
-                      ],
+                        
                     );
                   }),
                 )
