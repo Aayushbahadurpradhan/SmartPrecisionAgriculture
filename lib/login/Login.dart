@@ -90,6 +90,21 @@ class _LoginScreensState extends State<LoginScreens> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: constraints.maxHeight * 0.08,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: "Dont have account?    ",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                            children: [
+
+                            ],
+                          ),
+                        ),
                       ],
                     );
                   }),
