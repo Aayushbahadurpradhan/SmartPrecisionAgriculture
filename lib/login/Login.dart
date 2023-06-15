@@ -85,7 +85,36 @@ class _LoginScreensState extends State<LoginScreens> {
                             ],
                           ),
                         ),
-                        
+                        SizedBox(
+                          height: constraints.maxHeight * 0.08,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: "Dont have account?    ",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: "Sign Up",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegisterScreen()));
+                                  },
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     );
                   }),
                 )
