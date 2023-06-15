@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Dashboard'),
         backgroundColor: Colors.green,
         actions: [
+
         ],
       ),
       body: SafeArea(
@@ -41,23 +42,7 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    Center(
-                      child: Image.asset(
-                        'images/banner.png',
-                        height: 250,
-                        width: 500,
-                        scale: 0.8,
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'Smart Agriculture',
-                        style: const TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                   
                     const SizedBox(height: 38),
                     const Text(
                       'SENSOR',
