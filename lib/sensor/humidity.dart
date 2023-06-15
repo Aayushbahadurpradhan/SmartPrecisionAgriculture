@@ -58,7 +58,7 @@ class _TemperatureAndHumidityState extends State<TemperatureAndHumidity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TEMPERATURE AND HUMIDITY DATA'),
+        title: Text('HUMIDITY DATA'),
       ),
       body: SingleChildScrollView(
         child: Padding(
