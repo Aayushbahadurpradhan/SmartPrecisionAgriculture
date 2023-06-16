@@ -160,7 +160,21 @@ class _LoginScreensState extends State<LoginScreens> {
                               fontSize: 18,
                             ),
                             children: [
-
+                              TextSpan(
+                                text: "Sign Up",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegisterScreen()));
+                                  },
+                              )
                             ],
                           ),
                         ),
