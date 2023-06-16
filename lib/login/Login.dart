@@ -16,7 +16,7 @@ class LoginScreens extends StatefulWidget {
 }
 
 class _LoginScreensState extends State<LoginScreens> {
-
+  
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
@@ -32,8 +32,76 @@ class _LoginScreensState extends State<LoginScreens> {
                   height: deviceHeight * 0.30,
                   child: Image.asset('images/logo.png'),
                 ),
-
-
+                Container(
+                  height: deviceHeight * 0.75,
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: LayoutBuilder(builder: (ctx, constraints) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(height: constraints.maxHeight * 0.04),
+                        Container(
+                          height: constraints.maxHeight * 0.12,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffB4B4B4).withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(30)),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Center(
+                              child: TextFormField(
+                                controller: emailController,
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Email is required";
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Email',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: constraints.maxHeight * 0.04),
+                        Container(
+                          height: constraints.maxHeight * 0.12,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffB4B4B4).withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(30)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Center(
+                              child: TextFormField(
+                                controller: passwordController,
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Password is required";
+                                  }
+                                  return null;
+                                },
+                                obscureText: _isVisible ? false : true,
+                                decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _isVisible = !_isVisible;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        _isVisible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    border: InputBorder.none,
+                                    hintText: "Enter your password"),
+                              ),
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: constraints.maxHeight * 0.02,
                         ),
