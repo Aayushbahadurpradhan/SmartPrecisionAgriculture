@@ -16,7 +16,35 @@ class LoginScreens extends StatefulWidget {
 }
 
 class _LoginScreensState extends State<LoginScreens> {
-  
+  final form = GlobalKey<FormState>();
+  var _isVisible = false;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  late AuthViewModel auth;
+  @override
+  void initState() {
+    auth = Provider.of<AuthViewModel>(context, listen: false);
+    super.initState();
+  }
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  Future<void> login() async {
+    try {
+      await auth.login(emailController.text, passwordController.text);
+      if (auth.user != null) {
+        print("Login Sucessful");
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            backgroundColor: Colors.green, content: Text("Login Sucessful")));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => HomePage()));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
