@@ -10,7 +10,7 @@ class TemperatureAndHumidity extends StatefulWidget {
   _TemperatureAndHumidityState createState() => _TemperatureAndHumidityState();
 }
 
-class _Temperaturextends State<TemperatureAndHumidity> {
+class _TemperatureAndHumidityState extends State<TemperatureAndHumidity> {
   late DatabaseReference _databaseRef;
   late FirebaseMessaging _firebaseMessaging;
   double temperature = 0.0;
