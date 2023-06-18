@@ -17,6 +17,28 @@ class _TemperatureAndHumidityState extends State<TemperatureAndHumidity> {
     initializeFirebase();
     initializeNotifications();
   }
+
+  Future<void> initializeFirebase() async {
+    await Firebase.initializeApp();
+    _databaseRef = FirebaseDatabase.instance.reference().child('test');
+
+    _databaseRef.onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null && data is Map<dynamic, dynamic>) {
+        setState(() {
+          temperature = double.parse(data['temperature'].toString());
+          humidity = double.parse(data['humidity'].toString());
+          sensorData.add({
+            'temperature': temperature,
+            'humidity': humidity,
+            'timestamp': DateTime.now(),
+          });
+        });
+        checkTemperatureLevel();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
