@@ -47,6 +47,76 @@ class _TemperatureAndHumidityState extends State<TemperatureAndHumidity> {
     });
   }
 
+  void initializeNotifications() {
+    _firebaseMessaging = FirebaseMessaging.instance;
+    _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    final initializationSettingsAndroid =
+    AndroidInitializationSettings('@mipmap/ic_launcher');
+    final initializationSettings =
+    InitializationSettings(android: initializationSettingsAndroid);
+    _flutterLocalNotificationsPlugin?.initialize(initializationSettings);
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('onMessage: $message');
+      showNotification(
+        message.notification?.title,
+        message.notification?.body,
+      );
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('onMessageOpenedApp: $message');
+    });
+
+    _firebaseMessaging.getToken().then((token) {
+      print('FCM Token: $token');
+    });
+  }
+
+  void checkTemperatureLevel() {
+    if (temperature < 20.0) {
+      sendNotification('Temperature is too low!');
+    } else if (temperature > 30.0) {
+      sendNotification('Temperature is too high!');
+    }
+  }
+
+  Future<void> sendNotification(String message) async {
+    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    final platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+    await _flutterLocalNotificationsPlugin?.show(
+      0,
+      'Temperature Alert',
+      message,
+      platformChannelSpecifics,
+      payload: null,
+    );
+  }
+
+
+  void showNotification(String? title, String? body) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title ?? ''),
+        content: Text(body ?? ''),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
