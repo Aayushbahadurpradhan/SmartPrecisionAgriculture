@@ -11,9 +11,40 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   User? user;
   late DocumentSnapshot userData;
   TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _contactController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _currentPasswordController = TextEditingController();
   bool _isEditing = false;
 
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
 
+  void fetchUserData() async {
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      final userData = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get();
+      setState(() {
+        user = currentUser;
+        this.userData = userData;
+        _usernameController.text = userData.get('username') ?? '';
+        _emailController.text = user?.email ?? '';
+        _contactController.text = userData.get('contact') ?? '';
+      });
+    }
+  }
+
+  void _updateProfile() async {
+    setState(() {
+      _isEditing = true; // Enable editing mode
+    });
+  }
 
 
   @override
