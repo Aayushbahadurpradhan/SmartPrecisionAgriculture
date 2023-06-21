@@ -46,6 +46,53 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     });
   }
 
+  void _saveProfile() async {
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      if (_usernameController.text.isNotEmpty) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentUser.uid)
+            .update({
+          'username': _usernameController.text,
+          'contact': _contactController.text,
+        });
+      }
+
+      if (_passwordController.text.isNotEmpty) {
+        try {
+          final credential = EmailAuthProvider.credential(
+              email: user!.email!, password: _currentPasswordController.text);
+          await user!.reauthenticateWithCredential(credential);
+          await user!.updatePassword(_passwordController.text);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Password updated successfully!'),
+            ),
+          );
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'wrong-password') {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Invalid current password.'),
+              ),
+            );
+            return;
+          }
+        }
+      }
+
+      setState(() {
+        _isEditing = false; // Disable editing mode
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Profile updated successfully!'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,15 +123,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 'https://img.freepik.com/premium-vector/figure-person-hand-drawn-outline-doodle-icon-sketch-illustration-standing-figure-print-web-mobile-infographics-isolated-white-background_107173-17483.jpg', // Replace with image URL
               ),
             ),
-            SizedBox(height: 20),
-            TextFormField(
-              controller: _usernameController,
-              enabled: _isEditing,
-              decoration: InputDecoration(
-                labelText: 'Username',
-              ),
-            ),
-
 
           ],
         ),
