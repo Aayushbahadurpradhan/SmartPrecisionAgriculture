@@ -34,7 +34,53 @@ class _SoilMoistureScreenState extends State<SoilMoistureScreen> {
             ),
             SizedBox(height: 20),
 
-            
+            SizedBox(height: 20),
+            Text(
+              'History',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Expanded(
+              child: Card(
+                elevation: 4,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    columnSpacing: 20,
+                    headingRowHeight: 40,
+                    dataRowHeight: 56,
+                    horizontalMargin: 12,
+                    headingTextStyle: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                    dataTextStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
+                    columns: [
+                      DataColumn(label: Text('Timestamp')),
+                      DataColumn(label: Text('Soil Moisture')),
+                    ],
+                    rows: sensorData
+                        .map(
+                          (data) => DataRow(
+                        cells: [
+                          DataCell(
+                            Text(data['timestamp'].toString()),
+                          ),
+                          DataCell(
+                            Text(
+                              '${data['soil_moisture'].toStringAsFixed(1)}%',
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                         .toList(),
                   ),
                 ),
