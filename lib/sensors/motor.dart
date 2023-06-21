@@ -23,7 +23,20 @@ class _MotorControlPageState extends State<MotorControlPage> {
 
 
 
-
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Close'),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Text('Motor 2: $motor2Name'),
+            ),
+          ],
         ),
       ),
     );
