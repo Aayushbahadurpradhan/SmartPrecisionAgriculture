@@ -22,7 +22,21 @@ class _MotorControlPageState extends State<MotorControlPage> {
           children: [
 
 
-
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('Change Motor 2 Name'),
+                    content: TextField(
+                      onChanged: (text) {
+                        setState(() {
+                          motor2Name = text;
+                          setMotorName('motor2', motor2Name);
+                        });
+                      },
+                      controller: TextEditingController(text: motor2Name),
+                    ),
                     actions: [
                       TextButton(
                         onPressed: () {
