@@ -21,7 +21,15 @@ class _MotorControlPageState extends State<MotorControlPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
 
-
+            Switch(
+              value: motor2Status,
+              onChanged: (value) {
+                setState(() {
+                  motor2Status = value;
+                  setMotorValues(motor1Status, motor2Status);
+                });
+              },
+            ),
             ElevatedButton(
               onPressed: () {
                 showDialog(
