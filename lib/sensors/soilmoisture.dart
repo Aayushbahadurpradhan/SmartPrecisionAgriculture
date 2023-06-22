@@ -33,7 +33,24 @@ class _SoilMoistureScreenState extends State<SoilMoistureScreen> {
               ),
             ),
             SizedBox(height: 20),
-
+            Container(
+              width: 300,
+              height: 150,
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  '${soil_moisture.toStringAsFixed(1)}%',
+                  style: TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 20),
             Text(
               'History',
