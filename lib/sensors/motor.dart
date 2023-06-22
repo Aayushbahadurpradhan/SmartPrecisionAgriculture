@@ -56,7 +56,43 @@ class _MotorControlPageState extends State<MotorControlPage> {
               },
               child: Text('Motor 1: $motor1Name'),
             ),
-            
+            Switch(
+              value: motor2Status,
+              onChanged: (value) {
+                setState(() {
+                  motor2Status = value;
+                  setMotorValues(motor1Status, motor2Status);
+                });
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('Change Motor 2 Name'),
+                    content: TextField(
+                      onChanged: (text) {
+                        setState(() {
+                          motor2Name = text;
+                          setMotorName('motor2', motor2Name);
+                        });
+                      },
+                      controller: TextEditingController(text: motor2Name),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Close'),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Text('Motor 2: $motor2Name'),
+            ),
           ],
         ),
       ),
