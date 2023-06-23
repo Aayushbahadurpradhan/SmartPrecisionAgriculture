@@ -123,13 +123,118 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 'https://img.freepik.com/premium-vector/figure-person-hand-drawn-outline-doodle-icon-sketch-illustration-standing-figure-print-web-mobile-infographics-isolated-white-background_107173-17483.jpg', // Replace with image URL
               ),
             ),
-
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _usernameController,
+              enabled: _isEditing,
+              decoration: InputDecoration(
+                labelText: 'Username',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _emailController,
+              enabled: false,
+              decoration: InputDecoration(
+                labelText: 'Email',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _contactController,
+              enabled: _isEditing,
+              decoration: InputDecoration(
+                labelText: 'Contact',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _currentPasswordController,
+              enabled: _isEditing,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Current Password',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _passwordController,
+              enabled: _isEditing,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'New Password',
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _isEditing ? _saveProfile : _updateProfile,
+              child: Text(_isEditing ? 'Save Profile' : 'Edit Profile'),
+              style: ElevatedButton.styleFrom(
+                primary: _isEditing ? Colors.green : Colors.orange,
+                textStyle: TextStyle(fontSize: 18),
+                padding: EdgeInsets.symmetric(vertical: 16),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
