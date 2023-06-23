@@ -20,7 +20,16 @@ class _MotorControlPageState extends State<MotorControlPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
+            Switch(
+              value: motor1Status,
+              onChanged: (value) {
+                setState(() {
+                  motor1Status = value;
+                  setMotorValues(motor1Status, motor2Status);
+                });
+              },
+            ),
+          
             Switch(
               value: motor2Status,
               onChanged: (value) {
