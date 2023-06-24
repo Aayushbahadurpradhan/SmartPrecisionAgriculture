@@ -9,6 +9,12 @@ class MotorControlPage extends StatefulWidget {
 
 class _MotorControlPageState extends State<MotorControlPage> {
 
+  void setMotorName(String motorName, String newName) {
+    final DatabaseReference databaseReference =
+    FirebaseDatabase.instance.reference();
+
+    databaseReference.child(motorName).set(newName);
+  }
 
   @override
   Widget build(BuildContext context) {
