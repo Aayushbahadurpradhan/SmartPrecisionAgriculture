@@ -12,6 +12,34 @@ class SoilMoistureScreen extends StatefulWidget {
 class _SoilMoistureScreenState extends State<SoilMoistureScreen> {
 
 
+  void checkMoistureLevel() {
+    if (soil_moisture < 30) {
+      sendNotification('Soil is so wet!');
+    } else if (soil_moisture >= 30 && soil_moisture < 60) {
+      sendNotification('Soil moisture is so moderate.');
+    } else if (soil_moisture >= 60) {
+      sendNotification('Soil is so dry !');
+    }
+  }
+
+  Future<void> sendNotification(String message) async {
+    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    final platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+    await _flutterLocalNotificationsPlugin?.show(
+      0,
+      'Soil Moisture Alert',
+      message,
+      platformChannelSpecifics,
+      payload: null,
+    );
+  }
 
   void showNotification(String? title, String? body) {
     showDialog(
