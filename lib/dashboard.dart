@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_agri_project/sensors/soilmoisture.dart';
 
 class MyApp extends StatelessWidget {
   final ThemeData lightTheme = ThemeData(
@@ -98,6 +99,24 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _CardMenu(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SoilMoistureScreen(),
+                              ),
+                            );
+                          },
+                          icon: 'images/soil_moisture.png',
+                          title: 'SOIL MOISTURE',
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 28),
                   ],
                 ),
               ),
