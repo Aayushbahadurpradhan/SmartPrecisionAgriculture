@@ -10,6 +10,39 @@ class SoilMoistureScreen extends StatefulWidget {
 }
 
 class _SoilMoistureScreenState extends State<SoilMoistureScreen> {
+  DatabaseReference? _databaseRef;
+  FirebaseMessaging? _firebaseMessaging;
+  double soil_moisture = 0.0;
+  List<Map<String, dynamic>> sensorData = [];
+
+  FlutterLocalNotificationsPlugin? _flutterLocalNotificationsPlugin;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeFirebase();
+    initializeNotifications();
+  }
+
+  Future<void> initializeFirebase() async {
+    await Firebase.initializeApp();
+    _databaseRef = FirebaseDatabase.instance.reference().child('test');
+
+    // Listen to soil moisture changes
+    _databaseRef!.child('soil_moisture').onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null) {
+        setState(() {
+          soil_moisture = double.parse(data.toString());
+          sensorData.add({
+            'timestamp': DateTime.now(),
+            'soil_moisture': soil_moisture,
+          });
+        });
+        checkMoistureLevel();
+      }
+    });
+  }
 
   void initializeNotifications() {
     _firebaseMessaging = FirebaseMessaging.instance;
