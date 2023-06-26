@@ -10,8 +10,39 @@ class UltrasonicSensor extends StatefulWidget {
 }
 
 class _UltrasonicSensorState extends State<UltrasonicSensor> {
+  DatabaseReference? _databaseRef;
+  FirebaseMessaging? _firebaseMessaging;
+  double distance = 0.0;
+  List<Map<String, dynamic>> sensorData = [];
 
+  FlutterLocalNotificationsPlugin? _flutterLocalNotificationsPlugin;
 
+  @override
+  void initState() {
+    super.initState();
+    initializeFirebase();
+    initializeNotifications();
+  }
+
+  Future<void> initializeFirebase() async {
+    await Firebase.initializeApp();
+    _databaseRef = FirebaseDatabase.instance.reference().child('test');
+
+    // Listen to distance changes
+    _databaseRef!.child('distance').onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null) {
+        setState(() {
+          distance = double.parse(data.toString());
+          sensorData.add({
+            'timestamp': DateTime.now(),
+            'distance': distance,
+          });
+        });
+        checkWaterLevel();
+      }
+    });
+  }
 
 
   @override
