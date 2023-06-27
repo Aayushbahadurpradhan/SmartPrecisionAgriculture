@@ -73,6 +73,33 @@ class _UltrasonicSensorState extends State<UltrasonicSensor> {
     });
   }
 
+  void checkWaterLevel() {
+    if (distance < 30) {
+      sendNotification('Water tank is full!');
+    } else {
+      sendNotification('Water tank is not full');
+    }
+  }
+
+  Future<void> sendNotification(String message) async {
+    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    final platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+    await _flutterLocalNotificationsPlugin?.show(
+      0,
+      'Water Tank Alert',
+      message,
+      platformChannelSpecifics,
+      payload: null,
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
