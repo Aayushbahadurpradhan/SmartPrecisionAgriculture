@@ -10,6 +10,16 @@ class _PHValueSensorState extends State<PHValueSensor> {
   double pH = 0.0;
   List<Map<String, dynamic>> sensorData = [];
 
+  FlutterLocalNotificationsPlugin? _flutterLocalNotificationsPlugin;
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
