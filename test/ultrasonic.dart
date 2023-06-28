@@ -30,7 +30,8 @@ void main() {
     await tester.pumpWidget( MyApp(home: "/ultra",));
     await tester.pumpAndSettle();
 
-
+    expect(find.text('Water Tank Level'), findsWidgets);
+    expect(find.text('History'), findsOneWidget);
 
     await tester.tap(find.widgetWithText(Text, '30'));
     await tester.pump();
