@@ -31,7 +31,25 @@ class _UltrasonicSensorState extends State<UltrasonicSensor>
               ),
             ),
             SizedBox(height: 20),
+            Container(
            
+                    rows: sensorData
+                        .map(
+                          (data) => DataRow(
+                        cells: [
+                          DataCell(
+                            Text(data['timestamp'].toString()),
+                          ),
+                          DataCell(
+                            Text(
+                              '${data['distance'].toStringAsFixed(1)} cm',
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                        .toList(),
+                  ),
                 ),
               ),
             ),
