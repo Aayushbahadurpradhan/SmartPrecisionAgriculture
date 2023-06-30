@@ -32,7 +32,55 @@ class _UltrasonicSensorState extends State<UltrasonicSensor>
             ),
             SizedBox(height: 20),
             Container(
-           
+              width: 300,
+              height: 150,
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  '${distance.toStringAsFixed(1)} cm',
+                  style: TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'History',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Expanded(
+              child: Card(
+                elevation: 4,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    columnSpacing: 20,
+                    headingRowHeight: 40,
+                    dataRowHeight: 56,
+                    horizontalMargin: 12,
+                    headingTextStyle: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                    dataTextStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
+                    columns: [
+                      DataColumn(label: Text('Timestamp')),
+                      DataColumn(label: Text('Distance')),
+                    ],
                     rows: sensorData
                         .map(
                           (data) => DataRow(
