@@ -19,6 +19,25 @@ class _PHValueSensorState extends State<PHValueSensor> {
 
 
   }
+  Future<void> initializeFirebase() async {
+    await Firebase.initializeApp();
+    _databaseRef = FirebaseDatabase.instance.reference().child('test');
+
+    // Listen to pH changes
+    _databaseRef!.child('pH').onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null) {
+        setState(() {
+          pH = double.parse(data.toString());
+          sensorData.add({
+            'timestamp': DateTime.now(),
+            'pH': pH,
+          });
+        });
+        checkMoistureLevel();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
