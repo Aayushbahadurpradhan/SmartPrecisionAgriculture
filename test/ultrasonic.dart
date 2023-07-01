@@ -22,7 +22,13 @@ void main() {
     );
     // mock instances
     // final auth = MockFirebaseAuth();
+    final firestore = FakeFirebaseFirestore();
+    // set firebase service to mock instances
+    FirebaseService.db = firestore;
+    // FirebaseService.firebaseAuth = auth;
 
+    // network/http fix
+    HttpOverrides.global = null;
   });
 
 
@@ -32,6 +38,9 @@ void main() {
 
     expect(find.text('Water Tank Level'), findsWidgets);
     expect(find.text('History'), findsOneWidget);
- 
+    //
+    // await tester.tap(find.widgetWithText(Text, '30'));
+    // await tester.pump();
+    // expect(find.text('60'), findsOneWidget);
   });
 }
