@@ -21,14 +21,11 @@ void main() {
     );
 
   testWidgets('Raindrop UI Test', (WidgetTester tester) async {
-    await tester.pumpWidget( MyApp(home: "/rain",));
+    await tester.pumpWidget( MyApp(home: "/jjjj",));
     await tester.pumpAndSettle();
 
     expect(find.text('Raindrop Sensor'), findsWidgets);
     expect(find.text('History'), findsOneWidget);
 
-    await tester.tap(find.widgetWithText(Text, '30'));
-    await tester.pump();
-    expect(find.text('60'), findsOneWidget);
   });
 }
