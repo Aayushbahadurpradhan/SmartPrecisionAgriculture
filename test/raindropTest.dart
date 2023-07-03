@@ -19,6 +19,12 @@ void main() {
         projectId: 'test',
       ),
     );
+    final firestore = FakeFirebaseFirestore();
+    FirebaseService.db = firestore;
+
+    HttpOverrides.global = null;
+  });
+
 
   testWidgets('Raindrop UI Test', (WidgetTester tester) async {
     await tester.pumpWidget( MyApp(home: "/rain",));
@@ -26,6 +32,9 @@ void main() {
 
     expect(find.text('Raindrop Sensor'), findsWidgets);
     expect(find.text('History'), findsOneWidget);
-
+    //
+    // await tester.tap(find.widgetWithText(Text, '30'));
+    // await tester.pump();
+    // expect(find.text('60'), findsOneWidget);
   });
 }
