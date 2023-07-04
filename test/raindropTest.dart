@@ -32,9 +32,6 @@ void main() {
 
     expect(find.text('Raindrop Sensor'), findsWidgets);
     expect(find.text('History'), findsOneWidget);
-    //
-    // await tester.tap(find.widgetWithText(Text, '30'));
-    // await tester.pump();
-    // expect(find.text('60'), findsOneWidget);
+
   });
 }
