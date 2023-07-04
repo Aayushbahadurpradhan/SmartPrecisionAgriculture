@@ -10,6 +10,38 @@ class RaindropSensor extends StatefulWidget {
 }
 
 class _RaindropSensorState extends State<RaindropSensor> {
+  DatabaseReference? _databaseRef;
+  FirebaseMessaging? _firebaseMessaging;
+  double raindropValue = 0;
+  List<Map<String, dynamic>> sensorData = [];
+
+
+  @override
+  void initState() {
+    initializeFirebase();
+  }
+
+  Future<void> initializeFirebase() async {
+    await Firebase.initializeApp();
+    _databaseRef = FirebaseDatabase.instance.reference().child('test');
+
+    // Listen to raindrop sensor changes
+    _databaseRef!.child('raindrop').onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null) {
+        setState(() {
+          raindropValue = double.parse(data.toString()); // Convert value to double
+          sensorData.add({
+            'timestamp': DateTime.now(),
+            'raindropValue': raindropValue,
+          });
+        });
+        checkRaindropLevel();
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,6 +136,26 @@ class _RaindropSensorState extends State<RaindropSensor> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
