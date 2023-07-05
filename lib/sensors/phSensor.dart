@@ -24,6 +24,7 @@ class _PHValueSensorState extends State<PHValueSensor> {
     initializeNotifications();
   }
 
+
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
     _databaseRef = FirebaseDatabase.instance.reference().child('test');
@@ -55,6 +56,14 @@ class _PHValueSensorState extends State<PHValueSensor> {
     _flutterLocalNotificationsPlugin?.initialize(initializationSettings);
 
     // Initialize Firebase Cloud Messaging
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('onMessage: $message');
+      // Handle notification when the app is in the foreground
+      showNotification(
+        message.notification?.title,
+        message.notification?.body,
+      );
+    });
   }
 
   void checkMoistureLevel() {
