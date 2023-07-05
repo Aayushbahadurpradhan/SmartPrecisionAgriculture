@@ -64,7 +64,17 @@ class _PHValueSensorState extends State<PHValueSensor> {
         message.notification?.body,
       );
     });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('onMessageOpenedApp: $message');
+      // Handle notification when the app is in the background or terminated
+    });
+    _firebaseMessaging?.getToken().then((token) {
+      print('FCM Token: $token');
+      // Save the token to your user's data for sending targeted notifications
+    });
   }
+
+}
 
   void checkMoistureLevel() {
     if (pH < 7) {
