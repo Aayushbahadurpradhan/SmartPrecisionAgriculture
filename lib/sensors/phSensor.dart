@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class PHValueSensor extends StatefulWidget {
   @override
@@ -23,7 +19,6 @@ class _PHValueSensorState extends State<PHValueSensor> {
     initializeFirebase();
     initializeNotifications();
   }
-
 
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
@@ -73,8 +68,6 @@ class _PHValueSensorState extends State<PHValueSensor> {
       // Save the token to your user's data for sending targeted notifications
     });
   }
-
-}
 
   void checkMoistureLevel() {
     if (pH < 7) {
@@ -229,39 +222,6 @@ class _PHValueSensorState extends State<PHValueSensor> {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//.
 
 
 
