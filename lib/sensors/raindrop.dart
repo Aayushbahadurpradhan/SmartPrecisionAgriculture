@@ -24,6 +24,25 @@ class _RaindropSensorState extends State<RaindropSensor> {
     initializeNotifications();
   }
 
+  Future<void> initializeFirebase() async {
+    await Firebase.initializeApp();
+    _databaseRef = FirebaseDatabase.instance.reference().child('test');
+
+    // Listen to raindrop sensor changes
+    _databaseRef!.child('raindrop').onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null) {
+        setState(() {
+          raindropValue = double.parse(data.toString()); // Convert value to double
+          sensorData.add({
+            'timestamp': DateTime.now(),
+            'raindropValue': raindropValue,
+          });
+        });
+        checkRaindropLevel();
+      }
+    });
+  }
 
   void initializeNotifications() {
     _firebaseMessaging = FirebaseMessaging.instance;
@@ -54,34 +73,6 @@ class _RaindropSensorState extends State<RaindropSensor> {
     });
   }
 
-  void checkRaindropLevel() {
-    if (raindropValue >= 50 && raindropValue <= 100) {
-      sendNotification("Light rainfall detected");
-    } else if (raindropValue >= 20 && raindropValue < 50) {
-      sendNotification("Moderate rainfall detected");
-    } else if (raindropValue >= 0 && raindropValue < 20) {
-      sendNotification("Heavy rainfall detected");
-    }
-  }
-
-  Future<void> sendNotification(String message) async {
-    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'channel_id',
-      'channel_name',
-      importance: Importance.max,
-      priority: Priority.high,
-    );
-    final platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-    );
-    await _flutterLocalNotificationsPlugin?.show(
-      0,
-      'Raindrop Alert',
-      message,
-      platformChannelSpecifics,
-      payload: null,
-    );
-  }
 
   void showNotification(String? title, String? body) {
     showDialog(
@@ -193,52 +184,3 @@ class _RaindropSensorState extends State<RaindropSensor> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
