@@ -93,6 +93,16 @@ class _PHValueSensorState extends State<PHValueSensor> {
       importance: Importance.max,
       priority: Priority.high,
     );
+    final platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+    await _flutterLocalNotificationsPlugin?.show(
+      0,
+      'pH Value Alert',
+      message,
+      platformChannelSpecifics,
+      payload: null,
+    );
   }
 
   void showNotification(String? title, String? body) {
@@ -252,6 +262,8 @@ class _PHValueSensorState extends State<PHValueSensor> {
 
 
 //.
+
+
 
 
 
