@@ -73,6 +73,34 @@ class _RaindropSensorState extends State<RaindropSensor> {
     });
   }
 
+  void checkRaindropLevel() {
+    if (raindropValue >= 50 && raindropValue <= 100) {
+      sendNotification("Light rainfall detected");
+    } else if (raindropValue >= 20 && raindropValue < 50) {
+      sendNotification("Moderate rainfall detected");
+    } else if (raindropValue >= 0 && raindropValue < 20) {
+      sendNotification("Heavy rainfall detected");
+    }
+  }
+
+  Future<void> sendNotification(String message) async {
+    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    final platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+    await _flutterLocalNotificationsPlugin?.show(
+      0,
+      'Raindrop Alert',
+      message,
+      platformChannelSpecifics,
+      payload: null,
+    );
+  }
 
   void showNotification(String? title, String? body) {
     showDialog(
@@ -184,3 +212,54 @@ class _RaindropSensorState extends State<RaindropSensor> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
