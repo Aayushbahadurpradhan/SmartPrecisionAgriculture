@@ -19,7 +19,17 @@ void main() {
         projectId: 'test',
       ),
     );
-   
+    // mock instances
+    // final auth = MockFirebaseAuth();
+    final firestore = FakeFirebaseFirestore();
+    // set firebase service to mock instances
+    FirebaseService.db = firestore;
+    // FirebaseService.firebaseAuth = auth;
+
+    // network/http fix
+    HttpOverrides.global = null;
+  });
+
 
 );
 }
