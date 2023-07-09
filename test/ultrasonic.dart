@@ -8,6 +8,7 @@ import 'package:firebase_core_platform_interface/firebase_core_platform_interfac
 void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
+    // setup mock firebase core
     setupFirebaseCoreMocks();
     // dummy config for firebase
     await Firebase.initializeApp(
