@@ -8,9 +8,7 @@ import 'package:firebase_core_platform_interface/firebase_core_platform_interfac
 void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    // setup mock firebase core
     setupFirebaseCoreMocks();
-    // dummy config for firebase
     await Firebase.initializeApp(
       name: 'test',
       options: const FirebaseOptions(
@@ -20,14 +18,9 @@ void main() {
         projectId: 'test',
       ),
     );
-    // mock instances
-    // final auth = MockFirebaseAuth();
     final firestore = FakeFirebaseFirestore();
-    // set firebase service to mock instances
     FirebaseService.db = firestore;
-    // FirebaseService.firebaseAuth = auth;
 
-    // network/http fix
     HttpOverrides.global = null;
   });
 
