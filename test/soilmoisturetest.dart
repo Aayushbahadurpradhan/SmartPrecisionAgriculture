@@ -1,33 +1,36 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-
-import 'Login.dart';
-
-
-class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedSplashScreen(
-      splash: Column(
-        children: [
-          Image.asset('images/logo.png'),
-          const SizedBox(height: 65),
-          CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.black),),
-
-          const Text('Smart Agriculture', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.green),)
-        ],
+import 'dart:io';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:my_agri_project/main.dart';
+import 'package:my_agri_project/services/firebase_services.dart';
+import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
+void main() {
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    setupFirebaseCoreMocks();
+    await Firebase.initializeApp(
+      name: 'test',
+      options: const FirebaseOptions(
+        apiKey: 'test',
+        appId: 'test',
+        messagingSenderId: 'test',
+        projectId: 'test',
       ),
-      backgroundColor: Colors.white,
-      nextScreen: LoginScreens(),
-      splashIconSize: 600,
-      duration: 2000,
-      splashTransition: SplashTransition.sizeTransition, //to change the animation.
-      pageTransitionType: PageTransitionType.leftToRightWithFade,
-      animationDuration: const Duration(seconds: 1),
     );
-  }
+    final firestore = FakeFirebaseFirestore();
+    FirebaseService.db = firestore;
+
+    HttpOverrides.global = null;
+  });
+
+
+  testWidgets('SoilMoistureScreen UI Test', (WidgetTester tester) async {
+    await tester.pumpWidget( MyApp(home: "/soi",));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Soil Moisture'), findsWidgets);
+    expect(find.text('History'), findsOneWidget);
+  
+  });
 }
