@@ -31,6 +31,6 @@ void main() {
 
     expect(find.text('Soil Moisture'), findsWidgets);
     expect(find.text('History'), findsOneWidget);
-  
+
   });
 }
