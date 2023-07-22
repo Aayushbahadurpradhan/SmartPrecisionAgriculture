@@ -33,9 +33,9 @@ dependencies:
   loader_overlay: ^2.1.0
   page_transition: ^2.0.9
   firebase_database: ^10.2.2
-  firebase_auth: ^4.6.3
+  firebase_auth: ^4.7.2
   cloud_firestore: ^4.8.0
-  firebase_core: ^2.13.1
+  firebase_core: ^2.15.0
   firebase_storage: ^11.2.2
   fluttertoast: ^8.0.7
   provider: ^6.0.5
@@ -43,7 +43,6 @@ dependencies:
   light_sensor: ^2.0.2
   flutter_local_notifications: ^15.0.1
   lottie: ^2.1.0
-  fake_cloud_firestore: ^2.4.1+1
   charts_flutter_new: ^0.12.0
   line_chart: ^1.1.11
   fl_chart: ^0.63.0
@@ -55,10 +54,11 @@ dependencies:
   image_picker: ^1.0.0
   image_gallery_saver: ^2.0.1
   firebase_messaging: ^14.6.4
-#  gallery_saver: ^2.0.3
+  #  gallery_saver: ^2.0.3
 
-
-
+  firebase_auth_mocks: ^0.12.0
+  firebase_storage_mocks: ^0.6.1
+  fake_cloud_firestore: ^2.4.1+1
 
 
 dev_dependencies:
