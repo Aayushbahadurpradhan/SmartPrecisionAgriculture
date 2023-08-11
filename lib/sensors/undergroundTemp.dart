@@ -106,3 +106,63 @@ class _WaterProofTemperatureSensorState
     );
   }
 
+  void showNotification(String? title, String? body) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title ?? ''),
+        content: Text(body ?? ''),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Waterproof Temperature Sensor'),
+      ),
+      body: Center(
+      child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+      Text(
+      'Underground Temperature',
+      style: TextStyle(
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    SizedBox(height: 20),
+    Container(
+    width: 300,
+    height: 150,
+    decoration: BoxDecoration(
+    color: Colors.lightBlue,
+    borderRadius: BorderRadius.circular(10),
+    ),
+    child: Center(
+    child: Text(
+    '${temperature.toStringAsFixed(1)}°C',
+    style: TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    ),
+    ),
+    ),
+    ),
+    SizedBox(height: 20),
+    Text(
+    'History',
+    style: TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
