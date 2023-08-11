@@ -22,7 +22,6 @@ class _TemperatureAndHumidityState extends State<TemperatureAndHumidity> {
     _databaseRef = FirebaseDatabase.instance.reference().child('test');
     _firebaseMessaging = FirebaseMessaging.instance;
 
-    // Listen to database changes
     _databaseRef.onValue.listen((event) {
       final data = event.snapshot.value;
       if (data != null && data is Map<dynamic, dynamic>) {
@@ -38,19 +37,15 @@ class _TemperatureAndHumidityState extends State<TemperatureAndHumidity> {
       }
     });
 
-    // Initialize Firebase Cloud Messaging
     _firebaseMessaging.requestPermission();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('onMessage: $message');
-      // Handle notification when the app is in the foreground
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('onMessageOpenedApp: $message');
-      // Handle notification when the app is in the background or terminated
     });
     _firebaseMessaging.getToken().then((token) {
       print('FCM Token: $token');
-      // Save the token to your user's data for sending targeted notifications
     });
   }
 
