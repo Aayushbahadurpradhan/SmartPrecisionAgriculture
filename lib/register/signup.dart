@@ -56,3 +56,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(e.message.toString())));
       });
+    } catch (err) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(err.toString())));
+    }
+    _ui.loadState(false);
+  }
+
+  final formkey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    final deviceHeight = MediaQuery.of(context).size.height;
+    return SafeArea(
+        child: Scaffold(
+        body: SingleChildScrollView(
+        child: Container(
+        width: double.infinity,
+        child: Form(
+        key: formkey,
+        child: SingleChildScrollView(
+        child: Column(
+        children: [
+        Container(
+        height: deviceHeight * 0.20,
+        child: Image.asset('images/logo.png'),
+    ),
+    Container(
+    height: deviceHeight * 0.75,
+    width: double.infinity,
+    margin: EdgeInsets.symmetric(horizontal: 20),
+    child: LayoutBuilder(builder: (ctx, constraints) {
+    return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+    const Text(
+    'Register Account',
+    style: TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    ),
