@@ -28,6 +28,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
+            //has to be valid email address for receiving the email
             content: Text(' Check your email.'),
           );
         },
