@@ -13,5 +13,22 @@ class RegisterScreen extends StatefulWidget {
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
+class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
+  TextEditingController username = TextEditingController();
+  TextEditingController phoneNo = TextEditingController();
+  var _isVisible = false;
+  var _isVisibleConfirm = false;
 
+  late AuthViewModel _authViewModel;
+  late GlobalUIViewModel _ui;
+
+  @override
+  void initState() {
+    _authViewModel = Provider.of<AuthViewModel>(context, listen: false);
+    _ui = Provider.of<GlobalUIViewModel>(context, listen: false);
+    super.initState();
+  }
 
