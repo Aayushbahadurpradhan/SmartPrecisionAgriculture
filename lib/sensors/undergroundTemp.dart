@@ -24,4 +24,23 @@ class _WaterProofTemperatureSensorState
     initializeFirebase();
     initializeNotifications();
   }
+  Future<void> initializeFirebase() async {
+    await Firebase.initializeApp();
+    _databaseRef = FirebaseDatabase.instance.reference().child('test');
+
+    // Listen to temperature changes
+    _databaseRef!.child('waterproof_temperature').onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null) {
+        setState(() {
+          temperature = double.parse(data.toString());
+          sensorData.add({
+            'timestamp': DateTime.now(),
+            'temperature': temperature,
+          });
+        });
+        checkTemperatureLevel();
+      }
+    });
+  }
 
