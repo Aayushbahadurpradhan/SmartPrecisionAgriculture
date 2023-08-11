@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.indigo.shade50,
       appBar: AppBar(
         title: const Text('Dashboard'),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.lightGreen,
         actions: [
 
         ],
