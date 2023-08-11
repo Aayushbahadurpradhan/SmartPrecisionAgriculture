@@ -48,7 +48,17 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Dashboard'),
         backgroundColor: Colors.lightGreen,
         actions: [
-
+          IconButton(
+            icon: Icon(Icons.circle),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MotorControlPage(),
+                ),
+              );
+            },
+          ),
         ],
       ),
       body: SafeArea(
