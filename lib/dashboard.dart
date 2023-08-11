@@ -7,7 +7,12 @@ class MyApp extends StatelessWidget {
     hintColor: Colors.greenAccent,
   );
 
- 
+  final ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue), // Change the primarySwatch color to blue
+    hintColor: Colors.black12,
+  );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
