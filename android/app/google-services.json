@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "316494236811",
+    "firebase_url": "https://my-smart-agriculture-c9a33-default-rtdb.firebaseio.com",
+    "project_id": "my-smart-agriculture-c9a33",
+    "storage_bucket": "my-smart-agriculture-c9a33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316494236811:android:9407e2ae06c70eaabd988e",
+        "android_client_info": {
+          "package_name": "com.example.my_agri_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316494236811-udu2sr0l0pquu9l1rmdmdo39bca5o5ak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXaBGI0c1BbTpl09LQvLOhwKYXQytrFUc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316494236811-r9gfqkke7lhhq47go58md1afhhefm0ep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
