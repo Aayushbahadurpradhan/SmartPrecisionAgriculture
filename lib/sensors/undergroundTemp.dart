@@ -71,4 +71,38 @@ class _WaterProofTemperatureSensorState
       // Save the token to your user's data for sending targeted notifications
     });
   }
+  void checkTemperatureLevel() {
+    if (temperature < 0) {
+      sendNotification('Temperature is so below freezing!');
+    } else if (temperature < 10) {
+      sendNotification('Temperature is so very cold.');
+    } else if (temperature < 20) {
+      sendNotification('Temperature is so cold.');
+    } else if (temperature < 30) {
+      sendNotification('Temperature is so moderate.');
+    } else if (temperature < 40) {
+      sendNotification('Temperature is so warm.');
+    } else if (temperature >= 50) {
+      sendNotification('Temperature is so hot!');
+    }
+  }
+
+  Future<void> sendNotification(String message) async {
+    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    final platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+    await _flutterLocalNotificationsPlugin?.show(
+      0,
+      'Temperature Alert',
+      message,
+      platformChannelSpecifics,
+      payload: null,
+    );
+  }
 
