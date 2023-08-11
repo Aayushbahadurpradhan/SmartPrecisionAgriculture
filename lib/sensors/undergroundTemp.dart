@@ -166,3 +166,54 @@ class _WaterProofTemperatureSensorState
     fontWeight: FontWeight.bold,
     ),
     ),
+        SizedBox(height: 10),
+        Expanded(
+          child: Card(
+            elevation: 4,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                columnSpacing: 20,
+                headingRowHeight: 40,
+                dataRowHeight: 56,
+                horizontalMargin: 12,
+                headingTextStyle: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+                dataTextStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                ),
+                columns: [
+                  DataColumn(label: Text('Timestamp')),
+                  DataColumn(label: Text('Soil Temperature')),
+                ],
+                rows: sensorData
+                    .map(
+                      (data) => DataRow(
+                    cells: [
+                      DataCell(
+                        Text(data['timestamp'].toString()),
+                      ),
+                      DataCell(
+                        Text(
+                          'Soil Temperature: ${data['temperature'].toStringAsFixed(1)}°C',
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+                    .toList(),
+              ),
+            ),
+          ),
+        ),
+      ],
+      ),
+      ),
+    );
+  }
+}
+
