@@ -43,4 +43,32 @@ class _WaterProofTemperatureSensorState
       }
     });
   }
+  void initializeNotifications() {
+    _firebaseMessaging = FirebaseMessaging.instance;
+    _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    final initializationSettingsAndroid =
+    AndroidInitializationSettings('launch_background');
+    final initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+    );
+    _flutterLocalNotificationsPlugin?.initialize(initializationSettings);
+
+    // Initialize Firebase Cloud Messaging
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('onMessage: $message');
+      // Handle notification when the app is in the foreground
+      showNotification(
+        message.notification?.title,
+        message.notification?.body,
+      );
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('onMessageOpenedApp: $message');
+      // Handle notification when the app is in the background or terminated
+    });
+    _firebaseMessaging?.getToken().then((token) {
+      print('FCM Token: $token');
+      // Save the token to your user's data for sending targeted notifications
+    });
+  }
 
