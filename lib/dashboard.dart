@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
+  final ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue), // Change the primarySwatch color to blue
+    hintColor: Colors.greenAccent,
+  );
+
+  final ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue), // Change the primarySwatch color to blue
+    hintColor: Colors.black12,
+  );
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Agri Project',
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       home: HomePage(),
     );
   }
@@ -19,7 +33,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool _isDarkMode = true;
 
+  void _toggleTheme() {
+    setState(() {
+      _isDarkMode = !_isDarkMode;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

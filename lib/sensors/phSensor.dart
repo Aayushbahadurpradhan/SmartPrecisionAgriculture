@@ -5,8 +5,40 @@ class PHValueSensor extends StatefulWidget {
 }
 
 class _PHValueSensorState extends State<PHValueSensor> {
-
+  DatabaseReference? _databaseRef;
+  FirebaseMessaging? _firebaseMessaging;
   double pH = 0.0;
+  List<Map<String, dynamic>> sensorData = [];
+
+  FlutterLocalNotificationsPlugin? _flutterLocalNotificationsPlugin;
+
+
+  @override
+  void initState() {
+    super.initState();
+
+
+  }
+  Future<void> initializeFirebase() async {
+    await Firebase.initializeApp();
+    _databaseRef = FirebaseDatabase.instance.reference().child('test');
+
+    // Listen to pH changes
+    _databaseRef!.child('pH').onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null) {
+        setState(() {
+          pH = double.parse(data.toString());
+          sensorData.add({
+            'timestamp': DateTime.now(),
+            'pH': pH,
+          });
+        });
+        checkMoistureLevel();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,13 +49,13 @@ class _PHValueSensorState extends State<PHValueSensor> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Current pH Value',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          Text(
+          'Current pH Value',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         SizedBox(height: 10),
         Container(
           width: 150,
@@ -45,16 +77,16 @@ class _PHValueSensorState extends State<PHValueSensor> {
             ),
           ),
         ),
-          SizedBox(height: 20),
-          Text(
-            'History',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+        SizedBox(height: 20),
+        Text(
+          'History',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
           ),
+        ),
       ),
-      ),
+    ),
     );
   }
 
@@ -98,6 +130,24 @@ class _PHValueSensorState extends State<PHValueSensor> {
 
 
 
+
 //.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
