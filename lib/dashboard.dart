@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
+  final ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue), // Change the primarySwatch color to blue
+    hintColor: Colors.greenAccent,
+  );
 
+ 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
