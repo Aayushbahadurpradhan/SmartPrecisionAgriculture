@@ -9,3 +9,19 @@ class WaterProofTemperatureSensor extends StatefulWidget {
   _WaterProofTemperatureSensorState createState() =>
       _WaterProofTemperatureSensorState();
 }
+class _WaterProofTemperatureSensorState
+    extends State<WaterProofTemperatureSensor> {
+  DatabaseReference? _databaseRef;
+  FirebaseMessaging? _firebaseMessaging;
+  double temperature = 0.0;
+  List<Map<String, dynamic>> sensorData = [];
+
+  FlutterLocalNotificationsPlugin? _flutterLocalNotificationsPlugin;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeFirebase();
+    initializeNotifications();
+  }
+
