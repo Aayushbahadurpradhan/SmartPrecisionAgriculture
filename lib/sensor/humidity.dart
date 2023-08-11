@@ -79,7 +79,7 @@ class _TemperatureAndHumidityState extends State<TemperatureAndHumidity> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [Colors.lightBlue, Colors.blue],
+                    colors: [Colors.lightGreen, Colors.green],
                   ),
                 ),
                 child: Center(
